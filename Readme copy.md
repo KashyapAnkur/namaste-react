@@ -69,27 +69,3 @@ if(condition) {
 }
 
 because this code will run on the runtime and there tree shaking cannot be achieved.
-
-
-
-
-/*
-  Header
-    Logo
-    Nav Items
-  Body
-    Search
-    Restaurant Container
-      Img
-      Name of Res, Star Rating, cuisines, delivery time
-  Footer
-    Copyright
-    Links
-    Address
-    Contact
-*/
-
-
-# 2 type of routing in React
-- Client side routing
-- Server side routing
