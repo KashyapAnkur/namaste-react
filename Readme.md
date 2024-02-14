@@ -93,3 +93,11 @@ because this code will run on the runtime and there tree shaking cannot be achie
 # 2 type of routing in React
 - Client side routing
 - Server side routing
+
+# Redux Toolkit
+- Install Redux Toolkit and React Redux
+- Build our store
+- Connect our store to our App
+- Slice (Cart Slice)
+- Dispatch (action)
+- Read data using Selector
