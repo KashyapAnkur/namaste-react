@@ -101,3 +101,19 @@ because this code will run on the runtime and there tree shaking cannot be achie
 - Slice (Cart Slice)
 - Dispatch (action)
 - Read data using Selector
+
+# Types of testing (Developer)
+- Unit testing
+- Integration testing
+- End 2 End testing - e2e testing
+
+# Setting up testing in our App
+- Installed React Testing Library
+- Installed jest
+- Installed Babel dependencies
+- Configured Babel(Created babel.config.js and added some code to it)
+- npx jest --init (To configure jest)
+- install jsdom(browser-like)
+- You may have to install @babel/preset-react - to make jsx work in test cases.
+- Then you have to include @babel/preset-react inside my babel config.
+- You may have to install npm i -D @testing-library/jest-dom.
