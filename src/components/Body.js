@@ -1,4 +1,4 @@
-import React, { useState,  useEffect, useContext } from 'react'
+import React, { useState,  useEffect, useContext } from 'react';
 import RestaurantCard, { withPromotedLabel } from './RestaurantCard';
 import Shimmer from './Shimmer';
 import { Link } from 'react-router-dom';
@@ -11,6 +11,7 @@ const Body = () => {
 
     const [searchText, setSearchText] = useState("");
     const { loggedInUser, setUserName } = useContext(UserContext);
+    const [foundItems, setFoundItems] = useState(0);
 
     const handleListOfRestaurants = () => {
         const filteredRes = listOfRestaurants.filter((res) => {
@@ -28,11 +29,19 @@ const Body = () => {
         fetchData();
     }, []);
 
-    const fetchData = async () => {
-        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING");
-        const jsondata = await data.json();
-        setListOfRestaurants(jsondata?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-        setOriginalListOfRestaurants(jsondata?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    const fetchData = async() => {
+        try{
+            const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING");
+            const jsondata = await data.json();
+
+            if(data.status !== 200) {
+                throw new Error("Invalid Data", data.status);
+            }
+            setListOfRestaurants(jsondata?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+            setOriginalListOfRestaurants(jsondata?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        } catch(err) {
+            console.log(err, "ERROR!");
+        }
     }
 
     const handleSearchFilter = () => {
@@ -40,6 +49,7 @@ const Body = () => {
             return lor.info.name.toLowerCase().includes(searchText.toLowerCase());
         });
         setListOfRestaurants(filteredList);
+        setFoundItems(filteredList.length);
     };
 
     const handleSetSearch = (e) => {
@@ -51,12 +61,13 @@ const Body = () => {
         return <h1>Looks like you are offline!! Please check your Internet connection</h1>;
     }
 
-    return listOfRestaurants < 1 ? <Shimmer /> : (
+    return (
         <div className="body">
             <div className="filter flex">
                 <div className="search p-4">
-                    <input type="text" className='search-box border border-solid border-black' value={searchText} onChange={handleSetSearch} />
+                    <input type="text" data-testid="searchInput" className='search-box border border-solid border-black' value={searchText} onChange={handleSetSearch} />
                     <button className="search-btn rounded-lg px-4 py-2 bg-green-100 mx-4" onClick={handleSearchFilter}>Search</button>
+                    {searchText.length > 0 && <>{foundItems} item(s) found</>}
                 </div>
                 <div className="search p-4">
                     <button className="filter-btn rounded-lg px-4 py-2 bg-blue-100 mx-4"
@@ -76,8 +87,8 @@ const Body = () => {
                 </div>
             </div>
             <div className="res-container m-2 flex flex-wrap">
-                {listOfRestaurants.map((restaurant, index) => (
-                    <Link className="listOfRestaurantsLinks" to={`/restaurants/${restaurant?.info?.id}`} key={restaurant?.info?.id}>
+                {listOfRestaurants.map((restaurant) => (
+                    <Link data-testid="resCard" className="listOfRestaurantsLinks" to={`/restaurants/${restaurant?.info?.id}`} key={restaurant?.info?.id}>
                         {/* if the restaurant is promoted then add promoted label to it */}
                         {
                             restaurant?.info?.promoted == true ? (
