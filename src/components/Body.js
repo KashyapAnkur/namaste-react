@@ -54,6 +54,10 @@ const Body = () => {
 
     const handleSetSearch = (e) => {
         setSearchText(e.target.value);
+        if(e.target.value.length === 0) {
+            setListOfRestaurants(originalListOfRestaurants);
+            setFoundItems(0);
+        }
     }
 
     const onlineStatus = useOnlineStatus();
@@ -67,7 +71,7 @@ const Body = () => {
                 <div className="search p-4">
                     <input type="text" data-testid="searchInput" className='search-box border border-solid border-black' value={searchText} onChange={handleSetSearch} />
                     <button className="search-btn rounded-lg px-4 py-2 bg-green-100 mx-4" onClick={handleSearchFilter}>Search</button>
-                    {searchText.length > 0 && <>{foundItems} item(s) found</>}
+                    {(searchText.length > 0 && foundItems > 0) && <>{foundItems} item(s) found</>}
                 </div>
                 <div className="search p-4">
                     <button className="filter-btn rounded-lg px-4 py-2 bg-blue-100 mx-4"
@@ -77,13 +81,13 @@ const Body = () => {
                     </button>
                 </div>
                 <div className="search p-4">
-                    <input className="border p-1 rounded-lg px-3 border-black"
+                    {/* <input className="border p-1 rounded-lg px-3 border-black"
                         type="text"
                         placeholder="Enter Username"
                         onChange={(e) => setUserName(e.target.value)}
                         value={loggedInUser}
                         maxLength={30}
-                    />
+                    /> */}
                 </div>
             </div>
             <div className="res-container m-2 flex flex-wrap">
