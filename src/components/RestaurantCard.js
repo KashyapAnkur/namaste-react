@@ -1,5 +1,5 @@
 import { CDN_URL } from "../utils/constants";
-
+/* eslint-disable */
 const RestaurantCard = (props) => {
     const { resData } = props;
     const { 
