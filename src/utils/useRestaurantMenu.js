@@ -6,6 +6,7 @@ const useRestaurantMenu = (resId) => {
     
     useEffect(() => {
         fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [resId]);
 
     const fetchData = async() => {
