@@ -1,7 +1,6 @@
 
 import React from 'react';
 import UserClass from "./UserClass";
-import UserClass2 from "./UserClass2";
 import UserContext from "../utils/UserContext";
 
 

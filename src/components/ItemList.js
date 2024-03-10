@@ -39,7 +39,7 @@ const ItemList = ({ itemCards }) => {
                                 className="mx-6 text-xs -bottom-3 rounded-lg bg-purple-600 text-white shadow-lg absolute w-16 h-7"
                                 onClick={() => handleAction(item)}    
                             >Add +</button>
-                            <img src={CDN_URL + item?.card?.info?.imageId} />
+                            <img src={CDN_URL + item?.card?.info?.imageId} alt="" />
                         </div>
                         
                     </div>

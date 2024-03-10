@@ -22,13 +22,12 @@ class UserClass extends React.Component{
     }
 
     render() {
-        const { userData } = this.props;
         const { userInfo } = this.state;
 
         return (
             <>
                 <div className="user-card">
-                    <h3><img src={userInfo.avatar_url} height={120} width={150} /></h3>
+                    <h3><img src={userInfo.avatar_url} height={120} width={150} alt="" /></h3>
                     <h2>Name: {userInfo.name}</h2>
                     <h3>Location: {userInfo.location}</h3>
                 </div>

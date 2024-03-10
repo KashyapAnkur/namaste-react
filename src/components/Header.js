@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from 'react-router-dom';
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -9,7 +9,7 @@ const Header = () => {
     const [btnName, setBtnName] = useState("Login");
     const onlineStatus = useOnlineStatus();
     const handleLogin = () => {
-        setBtnName(btnName == "Login" ? "Logout" : "Login");
+        setBtnName(btnName === "Login" ? "Logout" : "Login");
     };
 
     const contextData = useContext(UserContext);
@@ -21,6 +21,7 @@ const Header = () => {
                 <img
                     className="w-36 logo"
                     src={`${LOGO_URL}`}
+                    alt=""
                 />
             </div>
             <div className="flex items-center nav-items">

@@ -1,6 +1,5 @@
 import React, { useState,  useEffect, useContext } from 'react';
 import RestaurantCard, { withPromotedLabel } from './RestaurantCard';
-import Shimmer from './Shimmer';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
 import UserContext from '../utils/UserContext';
@@ -10,7 +9,7 @@ const Body = () => {
     const [originalListOfRestaurants, setOriginalListOfRestaurants] = useState([]);
 
     const [searchText, setSearchText] = useState("");
-    const { loggedInUser, setUserName } = useContext(UserContext);
+    // const { loggedInUser, setUserName } = useContext(UserContext);
     const [foundItems, setFoundItems] = useState(0);
 
     const handleListOfRestaurants = () => {
@@ -95,7 +94,7 @@ const Body = () => {
                     <Link data-testid="resCard" className="listOfRestaurantsLinks" to={`/restaurants/${restaurant?.info?.id}`} key={restaurant?.info?.id}>
                         {/* if the restaurant is promoted then add promoted label to it */}
                         {
-                            restaurant?.info?.promoted == true ? (
+                            restaurant?.info?.promoted === true ? (
                                 <RestaurantCardPromoted resData={restaurant.info} />
                             ) :
                             <RestaurantCard
